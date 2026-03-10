@@ -38,7 +38,7 @@ export async function chat(
   if (isImagePrompt(message)) {
     // ---- IMAGE MODE ----
     const { output } = await ai.generate({
-      model: 'gemini-3-flash-preview',
+      model: 'googleai/gemini-2.0-flash',
       prompt: `${history.map(m => `${m.role}: ${m.content}`).join('\n')}\nuser: ${message}`,
       config: { responseMimeType: "image/png" },
     });
@@ -56,9 +56,10 @@ export async function chat(
   } else {
     // ---- CHAT MODE ----
      const { text } = await ai.generate({
-        model: 'gemini-3-flash-preview',
+        model: 'googleai/gemini-2.0-flash',
         prompt: `${history.map(m => `${m.role}: ${m.content}`).join('\n')}\nuser: ${message}`,
     });
     return { reply: text || '🤖 No response' };
   }
 }
+
