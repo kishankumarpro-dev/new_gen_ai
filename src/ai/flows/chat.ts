@@ -37,15 +37,11 @@ export async function chat(
 
   if (isImagePrompt(message)) {
     // ---- IMAGE MODE ----
-    // const { output } = await ai.generate({
-    //   model: 'googleai/gemini-1.5-flash-latest',
-    //   prompt: `${history.map(m => `${m.role}: ${m.content}`).join('\n')}\nuser: ${message}`,
-    //   config: { responseMimeType: "image/png" },
-    // });
     const { output } = await ai.generate({
       model: 'googleai/gemini-1.5-flash',
       prompt: `${history.map(m => `${m.role}: ${m.content}`).join('\n')}\nuser: ${message}`,
-      });
+      config: { responseMimeType: "image/png" },
+    });
     
     let reply = '🖼️ Here’s your image:';
     let image: string | undefined;
@@ -60,12 +56,13 @@ export async function chat(
   } else {
     // ---- CHAT MODE ----
      const { text } = await ai.generate({
-        model: 'googleai/gemini-1.5-flash-latest',
+        model: 'googleai/gemini-1.5-flash',
         prompt: `${history.map(m => `${m.role}: ${m.content}`).join('\n')}\nuser: ${message}`,
     });
     return { reply: text || '🤖 No response' };
   }
 }
+
 
 
 
