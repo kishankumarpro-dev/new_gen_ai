@@ -38,7 +38,7 @@ export async function chat(
   if (isImagePrompt(message)) {
     // ---- IMAGE MODE ----
     const { output } = await ai.generate({
-      model: 'googleai/gemini-1.5-flash-latest',
+      model: 'googleai/gemini-1.5-flash',
       prompt: `${history.map(m => `${m.role}: ${m.content}`).join('\n')}\nuser: ${message}`,
       config: { responseMimeType: "image/png" },
     });
@@ -62,3 +62,4 @@ export async function chat(
     return { reply: text || '🤖 No response' };
   }
 }
+
