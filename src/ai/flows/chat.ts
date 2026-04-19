@@ -39,9 +39,9 @@ export async function chat(
     // ---- IMAGE MODE ----
     const { output } = await ai.generate({
       model: 'googleai/gemini-2.5-flash-image',
-      prompt: message,
-      // prompt: `${history.map(m => `${m.role}: ${m.content}`).join('\n')}\nuser: ${message}`,
-      // config: { responseMimeType: "image/png" },
+      // prompt: message,
+      prompt: `${history.map(m => `${m.role}: ${m.content}`).join('\n')}\nuser: ${message}`,
+      config: { responseMimeType: "image/png" },
     });
     
     let reply = '🖼️ Here’s your image:';
